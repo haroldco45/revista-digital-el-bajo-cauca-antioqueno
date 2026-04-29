@@ -19,7 +19,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Source Serif 4', serif; background: var(--crema); color: var(--texto); line-height: 1.6; }
         
-        /* HEADER */
         header { background: var(--verde-selva); border-bottom: 4px solid var(--oro); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .header-top { display: flex; justify-content: space-between; padding: 8px 24px; font-size: 0.72rem; color: var(--crema-oscuro); border-bottom: 1px solid rgba(200,150,42,0.2); }
         .header-main { padding: 20px; text-align: center; }
@@ -29,44 +28,38 @@
         nav.secciones button { background: none; border: none; color: var(--crema-oscuro); padding: 15px 20px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; transition: 0.3s; }
         nav.secciones button.activo { color: var(--oro-claro); border-bottom: 3px solid var(--oro); background: rgba(255,255,255,0.05); }
 
-        /* TICKER */
         .ticker-wrap { background: var(--oro); padding: 10px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--verde-selva); }
         .ticker-content { display: inline-block; animation: ticker 40s linear infinite; font-weight: 900; color: var(--verde-selva); font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
         @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-        /* MAIN LAYOUT */
         main { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .portada-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; margin-bottom: 30px; border: 3px solid var(--texto); background: var(--texto); }
-        .articulo-principal { background: var(--verde-selva); padding: 40px; min-height: 400px; color: white; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; transition: 0.3s; }
+        .articulo-principal { background: var(--verde-selva); padding: 40px; min-height: 400px; color: white; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; transition: 0.3s; position: relative; overflow: hidden; }
         .articulo-principal:hover { filter: brightness(1.2); }
-        .articulo-principal h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.1; margin: 10px 0; }
+        .articulo-principal h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.1; margin: 10px 0; position: relative; z-index: 2; }
         
         .portada-lateral { display: flex; flex-direction: column; gap: 4px; }
-        .art-secundario { background: var(--crema-oscuro); padding: 25px; flex: 1; cursor: pointer; transition: 0.3s; border-left: 5px solid var(--oro); }
+        .art-secundario { background: var(--crema-oscuro); padding: 25px; flex: 1; cursor: pointer; transition: 0.3s; border-left: 5px solid var(--oro); display: flex; flex-direction: column; justify-content: center; }
         .art-secundario:hover { background: var(--blanco); }
 
-        /* IA PANEL */
         .ia-panel { background: var(--verde-selva); border: 2px solid var(--oro); padding: 30px; margin: 40px 0; color: white; border-radius: 4px; }
         .ia-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--oro-claro); margin-bottom: 15px; }
         .ia-controles { display: flex; gap: 15px; flex-wrap: wrap; }
         .ia-select, .ia-input { background: rgba(255,255,255,0.1); border: 1px solid var(--oro); color: white; padding: 12px; flex: 1; min-width: 250px; font-family: 'Source Serif 4', serif; }
-        .ia-btn { background: var(--oro); border: none; padding: 12px 30px; cursor: pointer; font-weight: 900; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; transition: 0.3s; }
-        .ia-btn:hover { background: var(--oro-claro); transform: scale(1.05); }
+        .ia-btn { background: var(--oro); border: none; padding: 12px 30px; cursor: pointer; font-weight: 900; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; transition: 0.3s; color: var(--verde-selva); }
+        .ia-btn:hover { background: var(--oro-claro); transform: scale(1.02); }
         .ia-btn:disabled { background: #666; cursor: not-allowed; }
 
-        /* GRID */
         .articulos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .tarjeta { background: white; border: 1px solid #ddd; cursor: pointer; padding: 25px; border-top: 5px solid var(--verde-selva); transition: 0.3s; }
+        .tarjeta { background: white; border: 1px solid #ddd; cursor: pointer; padding: 25px; border-top: 5px solid var(--verde-selva); transition: 0.3s; display: flex; flex-direction: column; }
         .tarjeta:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 
-        /* MODAL */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
         .modal { background: var(--crema); max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 50px; position: relative; border-top: 10px solid var(--oro); box-shadow: 0 0 30px rgba(0,0,0,0.5); }
         .modal-cerrar { position: absolute; top: 15px; right: 25px; font-size: 3rem; cursor: pointer; border: none; background: none; color: var(--verde-selva); }
         #modal-cuerpo p { margin-bottom: 20px; font-size: 1.15rem; text-align: justify; }
 
         footer { background: var(--verde-selva); color: white; text-align: center; padding: 50px; border-top: 5px solid var(--oro); margin-top: 50px; }
-        
         .loading { color: var(--oro-claro); font-weight: bold; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
     </style>
@@ -95,7 +88,7 @@
     <div class="portada-grid" id="portada-grid"></div>
 
     <div class="ia-panel">
-        <h3>✍️ GENERADOR DE INFORMES ESPECIALES VIBRAS POSITIVAS HM</h3>
+        <h3>✍️ GENERADOR DE INFORMES ESPECIALES VIBRAS POSITIVAS HM HM</h3>
         <div class="ia-controles">
             <select class="ia-select" id="ia-categoria">
                 <option value="region">Actualidad Regional</option>
@@ -112,7 +105,7 @@
 </main>
 
 <footer>
-    <p style="font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 2px;">VIBRAS POSITIVAS HM</p>
+    <p style="font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 2px;">VIBRAS POSITIVAS HM HM</p>
     <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">© 2026 · Todos los derechos reservados · Caucasia, Antioquia</p>
 </footer>
 
@@ -127,7 +120,6 @@
 <script>
 const API_KEY = "AIzaSyB_1RbhOVsXQ5zzBfp36p16LzKKfvSznYs";
 
-// Base de datos inicial
 let ARTICULOS = [
     { 
         id: 1, seccion: 'region', 
@@ -148,7 +140,7 @@ let ARTICULOS = [
 function actualizarReloj() {
     const ahora = new Date().toLocaleString('es-CO', { 
         timeZone: 'America/Bogota', weekday: 'long', day: 'numeric', month: 'long', 
-        hour: '2-digit', minute: '2-digit', hour12: true 
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
     });
     document.getElementById('fecha-actual').textContent = ahora.toUpperCase();
 }
@@ -162,9 +154,9 @@ function renderUI(data = ARTICULOS) {
         const p = data[0];
         port.innerHTML = `
             <div class="articulo-principal" onclick="abrirModal(${p.id})">
-                <span style="color:var(--oro-claro); font-weight: bold; border-bottom: 2px solid var(--oro);">${p.categoria}</span>
+                <span style="color:var(--oro-claro); font-weight: bold; border-bottom: 2px solid var(--oro); position: relative; z-index: 2;">${p.categoria}</span>
                 <h2>${p.titulo}</h2>
-                <p style="opacity: 0.9;">${p.resumen}</p>
+                <p style="opacity: 0.9; position: relative; z-index: 2;">${p.resumen}</p>
             </div>
             <div class="portada-lateral">
                 ${data.slice(1, 3).map(a => `
@@ -180,7 +172,7 @@ function renderUI(data = ARTICULOS) {
         <div class="tarjeta" onclick="abrirModal(${a.id})">
             <small style="color:var(--oro); font-weight: bold;">${a.categoria}</small>
             <h4 style="font-family: 'Playfair Display'; font-size: 1.4rem; margin: 10px 0;">${a.titulo}</h4>
-            <p style="font-size: 0.9rem; color: #555;">${p.resumen}</p>
+            <p style="font-size: 0.9rem; color: #555;">${a.resumen}</p>
         </div>`).join('');
 
     tkr.textContent = ARTICULOS.map(a => a.titulo.toUpperCase()).join('  ///  ');
@@ -195,9 +187,8 @@ async function generarArticuloIA() {
     if(!tema) return alert("Por favor, introduce un tema para desarrollar el informe.");
     
     btn.disabled = true;
-    res.innerHTML = "<span class='loading'>✍️ VIBRAS POSITIVAS HM REDACTANDO INFORME PROFUNDO...</span>";
+    res.innerHTML = "<span class='loading'>✍️ VIBRAS POSITIVAS HM HM REDACTANDO INFORME PROFUNDO...</span>";
 
-    // PROMPT OPTIMIZADO PARA EXTENSIÓN MÁXIMA
     const prompt = `Actúa como el Director Editorial de la revista "El Cauca". 
     Escribe un artículo PERIODÍSTICO EXTENSO, PROFESIONAL Y DETALLADO sobre: ${tema}. 
     CONTEXTO: Bajo Cauca Antioqueño.
@@ -229,7 +220,7 @@ async function generarArticuloIA() {
         renderUI();
     } catch (e) {
         console.error(e);
-        res.innerHTML = "❌ Error en el proceso de redacción. Intenta de nuevo.";
+        res.innerHTML = "❌ Error en el proceso de redacción. Revisa la consola.";
     } finally { btn.disabled = false; }
 }
 
@@ -242,6 +233,7 @@ function filtrarSeccion(sec, btn) {
 
 function abrirModal(id) {
     const a = ARTICULOS.find(x => x.id === id);
+    if(!a) return;
     document.getElementById('modal-titulo').textContent = a.titulo;
     document.getElementById('modal-cuerpo').innerHTML = a.cuerpo;
     document.getElementById('modal-overlay').style.display = 'flex';
@@ -253,7 +245,6 @@ function cerrarModal() {
     document.body.style.overflow = 'auto';
 }
 
-// Lógica de actualización al mediodía (PWA)
 function checkMediodia() {
     const ahora = new Date();
     if (ahora.getHours() === 12 && ahora.getMinutes() === 0) {
