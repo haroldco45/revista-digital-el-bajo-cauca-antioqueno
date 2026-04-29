@@ -2,18 +2,32 @@ name: Deploy PWA El Cauca
 
 on:
   push:
-    branches:
-      - main  # Se activa cada vez que subes cambios a la rama principal
+    branches: ["main"]
+
+# Permisos necesarios para que el robot pueda escribir en GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build-and-deploy:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: . # Sube todo el contenido de la carpeta raíz
-          branch: gh-pages # Lo despliega en esta rama para la web
+          path: '.' # Sube todo el contenido de la raíz
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
