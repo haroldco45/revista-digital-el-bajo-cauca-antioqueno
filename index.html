@@ -1108,7 +1108,10 @@ async function generarArticuloIA(esAuto = false) {
     ? `${CATEGORIA_LABELS[categoria]} — tema específico: "${temaExtra}"`
     : CATEGORIA_LABELS[categoria];
 
-  const SYSTEM_PROMPT = `Eres el editor jefe de "El Cauca", una revista digital del Bajo Cauca Antioqueño, Colombia.
+  // ⚠️ REEMPLAZA ESTO CON TU API KEY DE GOOGLE AI STUDIO: https://aistudio.google.com/apikey
+  const GEMINI_API_KEY = 'AIzaSyB_1RbhOVsXQ5zzBfp36p16LzKKfvSznYs';
+
+  const PROMPT_COMPLETO = `Eres el editor jefe de "El Cauca", una revista digital del Bajo Cauca Antioqueño, Colombia.
 Escribes artículos periodísticos LARGOS Y COMPLETOS, con profundidad, nunca cortados ni incompletos.
 Cada artículo debe tener entre 600 y 900 palabras y mínimo 6 párrafos bien desarrollados.
 Estructura los artículos con una introducción enganchadora, desarrollo detallado por subtemas, y un cierre reflexivo.
@@ -1119,33 +1122,40 @@ RESPONDE ÚNICAMENTE con un objeto JSON válido, sin markdown, sin backticks, si
   "subtitulo": "Entradilla que resume la historia en máx 150 caracteres",
   "emoji": "Un emoji representativo del tema",
   "secciones": [
-    { "subtitulo_seccion": "Título de la sección (opcional, puede ser vacío)", "parrafos": ["párrafo 1", "párrafo 2"] },
+    { "subtitulo_seccion": "Título de la sección", "parrafos": ["párrafo 1 de 80-130 palabras", "párrafo 2 de 80-130 palabras"] },
     { "subtitulo_seccion": "", "parrafos": ["párrafo 3", "párrafo 4"] },
-    { "subtitulo_seccion": "Título sección 2", "parrafos": ["párrafo 5", "párrafo 6"] }
+    { "subtitulo_seccion": "Reflexión final", "parrafos": ["párrafo 5", "párrafo 6"] }
   ]
 }
 
-Cada párrafo debe tener entre 80 y 130 palabras. Mínimo 6 párrafos en total distribuidos en las secciones.
-El contenido debe ser informativo, culturalmente preciso sobre la región (Caucasia, El Bagre, Nechí, Zaragoza, Cáceres, Tarazá) y escrito en español colombiano cálido y cercano.`;
+Cada párrafo debe tener entre 80 y 130 palabras. Mínimo 6 párrafos en total.
+El contenido debe ser informativo, culturalmente preciso sobre la región (Caucasia, El Bagre, Nechí, Zaragoza, Cáceres, Tarazá) y escrito en español colombiano cálido y cercano.
+
+Tema del artículo: ${temaFinal}`;
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 3000,
-        system: SYSTEM_PROMPT,
-        messages: [{ role: 'user', content: `Escribe un artículo periodístico completo y detallado sobre: ${temaFinal}` }]
-      })
-    });
+    const resp = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: PROMPT_COMPLETO }] }],
+          generationConfig: {
+            temperature: 0.8,
+            maxOutputTokens: 3000,
+            responseMimeType: 'application/json'
+          }
+        })
+      }
+    );
 
     const data = await resp.json();
-    const texto = data.content.map(i => i.text || '').join('');
-    // Limpiar posibles backticks o prefijos
-    const limpio = texto.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
 
-    // Buscar el objeto JSON dentro del texto por si hay texto extra
+    if (data.error) throw new Error(data.error.message);
+
+    const texto = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const limpio = texto.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
     const inicio = limpio.indexOf('{');
     const fin = limpio.lastIndexOf('}');
     const jsonStr = inicio >= 0 && fin > inicio ? limpio.slice(inicio, fin + 1) : limpio;
