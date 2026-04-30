@@ -1,261 +1,1250 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Cauca — Revista Digital del Bajo Cauca Antioqueño</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Cauca — Revista Digital del Bajo Cauca Antioqueño</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --oro: #C8962A;
+    --oro-claro: #E8B84B;
+    --verde-selva: #1A3A2A;
+    --verde-medio: #2D5A3D;
+    --tierra: #8B4513;
+    --crema: #F5EDD8;
+    --crema-oscuro: #E8D5B0;
+    --texto: #1A1A18;
+    --blanco: #FAFAF7;
+    --rojo-alerta: #C0392B;
+  }
 
-    <meta name="theme-color" content="#1A3A2A">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="manifest.json">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=Bebas+Neue&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --oro: #C8962A; --oro-claro: #E8B84B; --verde-selva: #1A3A2A;
-            --crema: #F5EDD8; --crema-oscuro: #E8D5B0; --texto: #1A1A18; --blanco: #FAFAF7;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Source Serif 4', serif; background: var(--crema); color: var(--texto); line-height: 1.6; }
-        
-        header { background: var(--verde-selva); border-bottom: 4px solid var(--oro); position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        .header-top { display: flex; justify-content: space-between; padding: 8px 24px; font-size: 0.72rem; color: var(--crema-oscuro); border-bottom: 1px solid rgba(200,150,42,0.2); }
-        .header-main { padding: 20px; text-align: center; }
-        .revista-nombre { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 5rem); color: var(--crema); letter-spacing: 0.1em; }
-        
-        nav.secciones { display: flex; justify-content: center; background: rgba(0,0,0,0.2); flex-wrap: wrap; }
-        nav.secciones button { background: none; border: none; color: var(--crema-oscuro); padding: 15px 20px; cursor: pointer; text-transform: uppercase; font-size: 0.8rem; font-weight: 600; transition: 0.3s; }
-        nav.secciones button.activo { color: var(--oro-claro); border-bottom: 3px solid var(--oro); background: rgba(255,255,255,0.05); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .ticker-wrap { background: var(--oro); padding: 10px; overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--verde-selva); }
-        .ticker-content { display: inline-block; animation: ticker 40s linear infinite; font-weight: 900; color: var(--verde-selva); font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--crema);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
 
-        main { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .portada-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4px; margin-bottom: 30px; border: 3px solid var(--texto); background: var(--texto); }
-        .articulo-principal { background: var(--verde-selva); padding: 40px; min-height: 400px; color: white; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; transition: 0.3s; position: relative; overflow: hidden; }
-        .articulo-principal:hover { filter: brightness(1.2); }
-        .articulo-principal h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; line-height: 1.1; margin: 10px 0; position: relative; z-index: 2; }
-        
-        .portada-lateral { display: flex; flex-direction: column; gap: 4px; }
-        .art-secundario { background: var(--crema-oscuro); padding: 25px; flex: 1; cursor: pointer; transition: 0.3s; border-left: 5px solid var(--oro); display: flex; flex-direction: column; justify-content: center; }
-        .art-secundario:hover { background: var(--blanco); }
+  /* ── CABECERA ── */
+  header {
+    background: var(--verde-selva);
+    border-bottom: 4px solid var(--oro);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
 
-        .ia-panel { background: var(--verde-selva); border: 2px solid var(--oro); padding: 30px; margin: 40px 0; color: white; border-radius: 4px; }
-        .ia-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--oro-claro); margin-bottom: 15px; }
-        .ia-controles { display: flex; gap: 15px; flex-wrap: wrap; }
-        .ia-select, .ia-input { background: rgba(255,255,255,0.1); border: 1px solid var(--oro); color: white; padding: 12px; flex: 1; min-width: 250px; font-family: 'Source Serif 4', serif; }
-        .ia-btn { background: var(--oro); border: none; padding: 12px 30px; cursor: pointer; font-weight: 900; font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; transition: 0.3s; color: var(--verde-selva); }
-        .ia-btn:hover { background: var(--oro-claro); transform: scale(1.02); }
-        .ia-btn:disabled { background: #666; cursor: not-allowed; }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 24px;
+    border-bottom: 1px solid rgba(200,150,42,0.3);
+    font-size: 0.72rem;
+    color: var(--crema-oscuro);
+    letter-spacing: 0.08em;
+  }
 
-        .articulos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        .tarjeta { background: white; border: 1px solid #ddd; cursor: pointer; padding: 25px; border-top: 5px solid var(--verde-selva); transition: 0.3s; display: flex; flex-direction: column; }
-        .tarjeta:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+  .header-fecha { font-style: italic; }
+  .header-edicion { color: var(--oro-claro); font-weight: 600; }
 
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
-        .modal { background: var(--crema); max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 50px; position: relative; border-top: 10px solid var(--oro); box-shadow: 0 0 30px rgba(0,0,0,0.5); }
-        .modal-cerrar { position: absolute; top: 15px; right: 25px; font-size: 3rem; cursor: pointer; border: none; background: none; color: var(--verde-selva); }
-        #modal-cuerpo p { margin-bottom: 20px; font-size: 1.15rem; text-align: justify; }
+  .header-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 18px 24px 14px;
+    text-align: center;
+  }
 
-        footer { background: var(--verde-selva); color: white; text-align: center; padding: 50px; border-top: 5px solid var(--oro); margin-top: 50px; }
-        .loading { color: var(--oro-claro); font-weight: bold; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-    </style>
+  .revista-nombre {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--crema);
+    letter-spacing: 0.12em;
+    line-height: 0.9;
+    text-shadow: 2px 4px 12px rgba(0,0,0,0.5);
+  }
+
+  .revista-subtitulo {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--oro-claro);
+    font-size: clamp(0.8rem, 2vw, 1.1rem);
+    letter-spacing: 0.2em;
+    margin-top: 4px;
+  }
+
+  .revista-linea {
+    width: 100%;
+    max-width: 400px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--oro), transparent);
+    margin: 10px auto 0;
+  }
+
+  nav.secciones {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    background: rgba(0,0,0,0.2);
+    flex-wrap: wrap;
+  }
+
+  nav.secciones button {
+    background: none;
+    border: none;
+    color: var(--crema-oscuro);
+    padding: 9px 18px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  nav.secciones button:hover,
+  nav.secciones button.activo {
+    color: var(--oro-claro);
+    border-bottom-color: var(--oro);
+    background: rgba(200,150,42,0.08);
+  }
+
+  /* ── BREAKING NEWS TICKER ── */
+  .ticker-wrap {
+    background: var(--oro);
+    padding: 6px 0;
+    overflow: hidden;
+    border-bottom: 2px solid var(--verde-selva);
+  }
+
+  .ticker-label {
+    display: inline-block;
+    background: var(--verde-selva);
+    color: var(--oro-claro);
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.15em;
+    font-size: 0.8rem;
+    padding: 2px 14px;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+
+  .ticker-content {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 40s linear infinite;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--verde-selva);
+    letter-spacing: 0.03em;
+  }
+
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── LAYOUT PRINCIPAL ── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+  }
+
+  /* ── PORTADA / HERO ── */
+  .portada-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2px;
+    margin-bottom: 32px;
+    border: 2px solid var(--texto);
+  }
+
+  @media(max-width:700px){ .portada-grid { grid-template-columns: 1fr; } }
+
+  .articulo-principal {
+    background: var(--verde-selva);
+    padding: 32px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .articulo-principal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(26,58,42,0.3) 0%, rgba(26,58,42,0.85) 60%);
+    z-index: 1;
+  }
+
+  .articulo-principal .emoji-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    font-size: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.12;
+    z-index: 0;
+  }
+
+  .articulo-principal:hover { transform: scale(1.005); }
+
+  .art-etiqueta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--oro-claro);
+    background: rgba(200,150,42,0.2);
+    border: 1px solid var(--oro);
+    display: inline-block;
+    padding: 3px 10px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+    width: fit-content;
+  }
+
+  .articulo-principal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--crema);
+    line-height: 1.15;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 12px;
+  }
+
+  .art-resumen {
+    color: rgba(245,237,216,0.8);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 16px;
+  }
+
+  .art-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.72rem;
+    color: var(--oro-claro);
+    letter-spacing: 0.05em;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Columna lateral portada */
+  .portada-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .art-secundario {
+    background: var(--crema-oscuro);
+    padding: 18px;
+    flex: 1;
+    border-left: 3px solid var(--oro);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .art-secundario:hover { background: #ddd0a8; }
+
+  .art-secundario .art-etiqueta {
+    color: var(--verde-selva);
+    background: rgba(26,58,42,0.1);
+    border-color: var(--verde-selva);
+    font-size: 0.65rem;
+    margin-bottom: 8px;
+  }
+
+  .art-secundario h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: var(--verde-selva);
+  }
+
+  .art-secundario p {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* ── SEPARADOR EDITORIAL ── */
+  .separador {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 28px 0 20px;
+  }
+
+  .separador-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    color: var(--verde-selva);
+    white-space: nowrap;
+  }
+
+  .separador-linea {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--oro), transparent);
+  }
+
+  .separador-ornamento {
+    color: var(--oro);
+    font-size: 1.2rem;
+  }
+
+  /* ── GRID ARTÍCULOS ── */
+  .articulos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .tarjeta {
+    background: var(--blanco);
+    border: 1px solid #d4c49a;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+  }
+
+  .tarjeta-imagen {
+    height: 160px;
+    background: var(--verde-selva);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tarjeta-imagen::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40%;
+    background: linear-gradient(to top, rgba(26,58,42,0.6), transparent);
+  }
+
+  .tarjeta-cuerpo { padding: 16px; }
+
+  .tarjeta h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    color: var(--verde-selva);
+  }
+
+  .tarjeta p {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: #5a5040;
+    margin-bottom: 10px;
+  }
+
+  .tarjeta-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #e0d5bc;
+  }
+
+  .tarjeta-categoria {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--oro);
+    font-weight: 700;
+  }
+
+  .tarjeta-fecha {
+    font-size: 0.68rem;
+    color: #999;
+    font-style: italic;
+  }
+
+  /* ── PANEL CLIMA / DATO ── */
+  .sidebar-widgets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  @media(max-width:600px){ .sidebar-widgets { grid-template-columns: 1fr; } }
+
+  .widget {
+    background: var(--verde-selva);
+    color: var(--crema);
+    padding: 20px;
+    border: 2px solid var(--oro);
+  }
+
+  .widget-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--oro-claro);
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(200,150,42,0.3);
+    padding-bottom: 6px;
+  }
+
+  .widget-valor {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--crema);
+    margin-bottom: 4px;
+  }
+
+  .widget-desc {
+    font-size: 0.78rem;
+    color: rgba(245,237,216,0.7);
+    line-height: 1.5;
+  }
+
+  /* ── MODAL ARTÍCULO ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,24,0.85);
+    z-index: 1000;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .modal-overlay.abierto { display: flex; }
+
+  .modal {
+    background: var(--crema);
+    max-width: 760px;
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+    position: relative;
+    animation: slideUp 0.3s ease;
+    border-top: 5px solid var(--oro);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-cerrar {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--verde-selva);
+    line-height: 1;
+  }
+
+  .modal-etiqueta {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--oro);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .modal h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    color: var(--verde-selva);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .modal-meta {
+    font-size: 0.75rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #d4c49a;
+    padding-bottom: 14px;
+  }
+
+  .modal-cuerpo {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--texto);
+  }
+
+  .modal-cuerpo p { margin-bottom: 16px; }
+
+  /* ── GENERADOR IA ── */
+  .ia-panel {
+    background: var(--verde-selva);
+    border: 2px solid var(--oro);
+    padding: 28px;
+    margin-bottom: 32px;
+  }
+
+  .ia-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 0.2em;
+    color: var(--oro-claro);
+    margin-bottom: 6px;
+  }
+
+  .ia-desc {
+    color: rgba(245,237,216,0.7);
+    font-size: 0.82rem;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .ia-controles {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .ia-select, .ia-input {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(200,150,42,0.5);
+    color: var(--crema);
+    padding: 10px 14px;
+    font-family: 'Source Serif 4', serif;
+    font-size: 0.85rem;
+    flex: 1;
+    min-width: 160px;
+    outline: none;
+  }
+
+  .ia-select option { background: var(--verde-selva); }
+
+  .ia-btn {
+    background: var(--oro);
+    border: none;
+    color: var(--verde-selva);
+    padding: 10px 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .ia-btn:hover { background: var(--oro-claro); }
+  .ia-btn:disabled { opacity: 0.5; cursor: wait; }
+
+  .ia-btn-auto {
+    background: rgba(200,150,42,0.15);
+    border: 1px solid var(--oro);
+    color: var(--oro-claro);
+    padding: 8px 18px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .ia-btn-auto.activo {
+    background: rgba(200,150,42,0.35);
+    color: var(--crema);
+  }
+
+  .ia-btn-auto:hover { background: rgba(200,150,42,0.25); }
+
+  .ia-auto-status {
+    font-size: 0.72rem;
+    color: var(--oro-claro);
+    font-style: italic;
+    margin-top: 8px;
+    min-height: 18px;
+  }
+
+  .ia-auto-status .dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--oro-claro);
+    margin-right: 6px;
+    animation: pulsar 1.2s ease-in-out infinite;
+  }
+
+  .ia-resultado {
+    margin-top: 16px;
+    display: none;
+  }
+
+  .ia-resultado.visible { display: block; }
+
+  .ia-articulo-generado {
+    background: rgba(245,237,216,0.08);
+    border-left: 3px solid var(--oro);
+    padding: 20px;
+    color: var(--crema);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+
+  .ia-articulo-generado h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--oro-claro);
+  }
+
+  .ia-articulo-generado p { margin-bottom: 12px; }
+
+  .ia-articulo-generado .loading {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: var(--oro-claro);
+    animation: pulsar 1.5s ease-in-out infinite;
+  }
+
+  @keyframes pulsar { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* ── MODAL MEJORADO PARA ARTÍCULOS LARGOS ── */
+  .modal-cuerpo p { margin-bottom: 18px; text-align: justify; }
+  .modal-cuerpo p:first-child::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    float: left;
+    line-height: 0.8;
+    margin: 4px 8px 0 0;
+    color: var(--oro);
+  }
+  .modal-cuerpo h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--verde-selva);
+    margin: 24px 0 10px;
+    border-bottom: 1px solid var(--crema-oscuro);
+    padding-bottom: 6px;
+  }
+  .modal-cuerpo blockquote {
+    border-left: 3px solid var(--oro);
+    padding: 10px 18px;
+    margin: 20px 0;
+    background: var(--crema-oscuro);
+    font-style: italic;
+    color: #4a4030;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--verde-selva);
+    border-top: 4px solid var(--oro);
+    padding: 32px 24px 20px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--crema);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .footer-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--oro-claro);
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+  }
+
+  .footer-credito {
+    font-size: 0.72rem;
+    color: rgba(245,237,216,0.5);
+    letter-spacing: 0.05em;
+    margin-top: 16px;
+    border-top: 1px solid rgba(200,150,42,0.2);
+    padding-top: 14px;
+  }
+
+  .footer-credito span {
+    color: var(--oro-claro);
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:480px){
+    .ia-controles { flex-direction: column; }
+    .modal { padding: 24px 20px; }
+    .articulo-principal { min-height: 280px; padding: 20px; }
+  }
+</style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-    <div class="header-top">
-        <span id="fecha-actual"></span>
-        <span>BAJO CAUCA ANTIOQUEÑO · COLOMBIA</span>
-    </div>
-    <div class="header-main">
-        <div class="revista-nombre">El Cauca</div>
-    </div>
-    <nav class="secciones">
-        <button class="activo" onclick="filtrarSeccion('todo', this)">Todo</button>
-        <button onclick="filtrarSeccion('region', this)">Región</button>
-        <button onclick="filtrarSeccion('economia', this)">Economía</button>
-        <button onclick="filtrarSeccion('cultura', this)">Cultura</button>
-    </nav>
+  <div class="header-top">
+    <span class="header-fecha" id="fecha-actual">Cargando fecha...</span>
+    <span class="header-edicion">Edición Digital · Bajo Cauca Antioqueño</span>
+  </div>
+  <div class="header-main">
+    <div class="revista-nombre">El Cauca</div>
+    <div class="revista-subtitulo">Revista Digital del Bajo Cauca Antioqueño</div>
+    <div class="revista-linea"></div>
+  </div>
+  <nav class="secciones">
+    <button class="activo" onclick="filtrarSeccion('todo',this)">Todo</button>
+    <button onclick="filtrarSeccion('region',this)">Región</button>
+    <button onclick="filtrarSeccion('economia',this)">Economía</button>
+    <button onclick="filtrarSeccion('cultura',this)">Cultura</button>
+    <button onclick="filtrarSeccion('ambiente',this)">Ambiente</button>
+    <button onclick="filtrarSeccion('deporte',this)">Deportes</button>
+    <button onclick="filtrarSeccion('historia',this)">Historia</button>
+  </nav>
 </header>
 
-<div class="ticker-wrap"><div class="ticker-content" id="ticker-text"></div></div>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <span class="ticker-label">🔴 AHORA</span>
+  <span class="ticker-content" id="ticker-text">
+    Caucasia, capital del Bajo Cauca  ·  Tierra del oro y el aguacate  ·  Río Cauca, arteria del territorio  ·  Caucasia, capital del Bajo Cauca  ·  Tierra del oro y el aguacate  ·  Río Cauca, arteria del territorio
+  </span>
+</div>
 
 <main>
-    <div class="portada-grid" id="portada-grid"></div>
 
-    <div class="ia-panel">
-        <h3>✍️ GENERADOR DE INFORMES ESPECIALES VIBRAS POSITIVAS HM HM</h3>
-        <div class="ia-controles">
-            <select class="ia-select" id="ia-categoria">
-                <option value="region">Actualidad Regional</option>
-                <option value="economia">Economía y Minería</option>
-                <option value="cultura">Cultura y Tradiciones</option>
-            </select>
-            <input class="ia-input" id="ia-tema" type="text" placeholder="Escribe un tema (ej: El impacto del río Cauca en la pesca)">
-            <button class="ia-btn" id="ia-generar-btn" onclick="generarArticuloIA()">GENERAR INFORME</button>
-        </div>
-        <div id="ia-articulo-generado" style="margin-top:20px; border-left: 3px solid var(--oro-claro); padding-left: 15px;"></div>
+  <!-- PORTADA -->
+  <div class="portada-grid" id="portada-grid">
+    <!-- Se llena con JS -->
+  </div>
+
+  <!-- WIDGETS -->
+  <div class="sidebar-widgets">
+    <div class="widget">
+      <div class="widget-titulo">📍 Caucasia, Antioquia</div>
+      <div class="widget-valor">7°58'N</div>
+      <div class="widget-desc">Capital del Bajo Cauca Antioqueño · 102 m s. n. m. · Orillas del río Cauca y río Man</div>
     </div>
+    <div class="widget">
+      <div class="widget-titulo">📊 Dato de la región</div>
+      <div class="widget-valor" id="dato-valor">6 municipios</div>
+      <div class="widget-desc" id="dato-desc">Conforman el Bajo Cauca: Caucasia, El Bagre, Nechí, Zaragoza, Cáceres y Tarazá</div>
+    </div>
+  </div>
 
-    <div class="articulos-grid" id="articulos-grid"></div>
+  <!-- GENERADOR IA -->
+  <div class="ia-panel">
+    <div class="ia-titulo">⚡ Generador de Artículos con IA</div>
+    <div class="ia-desc">Genera artículos completos de varios párrafos sobre el Bajo Cauca · Actívalo en AUTO para que la revista se actualice sola cada 5 minutos</div>
+    <div class="ia-controles">
+      <select class="ia-select" id="ia-categoria">
+        <option value="historia">Historia de la región</option>
+        <option value="economia">Economía y minería</option>
+        <option value="cultura">Cultura y tradiciones</option>
+        <option value="ambiente">Medio ambiente</option>
+        <option value="gastronomia">Gastronomía típica</option>
+        <option value="turismo">Turismo y lugares</option>
+        <option value="personajes">Personajes ilustres</option>
+        <option value="deporte">Deportes y comunidad</option>
+        <option value="actualidad">Actualidad y desarrollo</option>
+      </select>
+      <input class="ia-input" id="ia-tema" type="text" placeholder="Tema específico (opcional)..." />
+      <button class="ia-btn" id="ia-generar-btn" onclick="generarArticuloIA(false)">✍ GENERAR</button>
+      <button class="ia-btn-auto" id="ia-auto-btn" onclick="toggleAutoActualizacion()">🔄 AUTO: OFF</button>
+    </div>
+    <div class="ia-auto-status" id="ia-auto-status"></div>
+    <div class="ia-resultado" id="ia-resultado">
+      <div class="ia-articulo-generado" id="ia-articulo-generado"></div>
+    </div>
+  </div>
+
+  <!-- SEPARADOR -->
+  <div class="separador">
+    <div class="separador-titulo">Más noticias</div>
+    <div class="separador-linea"></div>
+    <div class="separador-ornamento">✦</div>
+  </div>
+
+  <!-- GRID DE TARJETAS -->
+  <div class="articulos-grid" id="articulos-grid">
+    <!-- Se llena con JS -->
+  </div>
+
 </main>
 
+<!-- FOOTER -->
 <footer>
-    <p style="font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 2px;">VIBRAS POSITIVAS HM HM</p>
-    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">© 2026 · Todos los derechos reservados · Caucasia, Antioquia</p>
+  <div class="footer-logo">El Cauca</div>
+  <div class="footer-sub">Revista Digital del Bajo Cauca Antioqueño · Caucasia</div>
+  <div class="footer-credito">
+    <span>Desarrollada por Vibras Positivas HM — Derechos de Autor Reservados</span><br>
+    Toda la información generada por IA es de carácter informativo y cultural
+  </div>
 </footer>
 
-<div class="modal-overlay" id="modal-overlay" onclick="if(event.target==this) cerrarModal()">
-    <div class="modal">
-        <button class="modal-cerrar" onclick="cerrarModal()">×</button>
-        <h2 id="modal-titulo" style="font-family: 'Playfair Display'; font-size: 2.5rem; margin-bottom: 10px;"></h2>
-        <div id="modal-cuerpo"></div>
-    </div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="cerrarModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-cerrar" onclick="cerrarModalBtn()">×</button>
+    <span class="modal-etiqueta" id="modal-etiqueta"></span>
+    <h2 id="modal-titulo"></h2>
+    <div class="modal-meta" id="modal-meta"></div>
+    <div class="modal-cuerpo" id="modal-cuerpo"></div>
+  </div>
 </div>
 
 <script>
-const API_KEY = "AIzaSyB_1RbhOVsXQ5zzBfp36p16LzKKfvSznYs";
-
-let ARTICULOS = [
-    { 
-        id: 1, seccion: 'region', 
-        titulo: 'Caucasia: El despertar de la Capital del Bajo Cauca', 
-        resumen: 'Análisis sobre el crecimiento urbano y los retos de seguridad en el corazón del territorio.', 
-        cuerpo: '<p>Caucasia se erige hoy como el centro neurálgico de una subregión que no se detiene. Con más de 100.000 habitantes, la ciudad enfrenta el desafío de modernizar su infraestructura vial para conectar de forma eficiente con la troncal de occidente.</p><p>Expertos señalan que el puerto fluvial sigue siendo una oportunidad desaprovechada que podría dinamizar el transporte de carga hacia el Caribe colombiano.</p>', 
-        categoria: 'REGIÓN' 
-    },
-    { 
-        id: 2, seccion: 'economia', 
-        titulo: 'Minería en El Bagre: Hacia la formalización total', 
-        resumen: 'Nuevas cooperativas mineras buscan erradicar el uso de mercurio en la extracción de oro.', 
-        cuerpo: '<p>En los yacimientos de El Bagre y Zaragoza, el panorama está cambiando. La transición hacia una minería de "cero mercurio" no solo es una exigencia legal, sino una necesidad ambiental para proteger las ciénagas del Nechí.</p><p>Las mesas de diálogo entre pequeños mineros y el Gobierno Nacional han permitido trazar una hoja de ruta para la legalización de títulos ancestrales.</p>', 
-        categoria: 'ECONOMÍA' 
-    }
+// ═══════════════════════════════════════════════
+//  DATOS BASE DE LA REVISTA
+// ═══════════════════════════════════════════════
+const ARTICULOS_BASE = [
+  {
+    id: 1,
+    seccion: 'region',
+    emoji: '🏙️',
+    titulo: 'Caucasia: la capital que late al ritmo del río Cauca',
+    resumen: 'Ciudad vibrante que une tradición llanera con modernidad. Centro comercial, educativo y cultural del Bajo Cauca Antioqueño.',
+    cuerpo: `<p>Caucasia es el municipio más poblado de la subregión del Bajo Cauca Antioqueño, con más de 100.000 habitantes. Fundada oficialmente en 1945, se ubica en la confluencia de los ríos Cauca y Man, lo que la convierte en un nudo estratégico para el comercio y la conectividad del norte de Antioquia.</p>
+    <p>Su economía descansa sobre tres pilares fundamentales: la ganadería extensiva en las sabanas del San Jorge, la agricultura —especialmente el cultivo de aguacate Hass y cacao— y la actividad comercial que la hace epicentro de intercambio para toda la subregión.</p>
+    <p>La ciudad cuenta con instituciones educativas universitarias como la Institución Universitaria Pascual Bravo, el Politécnico Colombiano Jaime Isaza Cadavid y sedes de la Universidad de Antioquia, consolidando a Caucasia como polo académico del Bajo Cauca.</p>`,
+    categoria: 'REGIÓN',
+    fecha: hoy()
+  },
+  {
+    id: 2,
+    seccion: 'economia',
+    emoji: '⛏️',
+    titulo: 'El oro del Bajo Cauca: entre bonanza y desafíos ambientales',
+    resumen: 'La minería aurífera ha sido motor histórico de la economía regional. Hoy busca transitar hacia una explotación más sostenible.',
+    cuerpo: `<p>El Bajo Cauca Antioqueño es uno de los territorios con mayor tradición minera de Colombia. La extracción de oro, principalmente aluvial, ha marcado profundamente la historia, la cultura y la economía de municipios como El Bagre, Zaragoza, Nechí y Cáceres.</p>
+    <p>Sin embargo, la minería ilegal y el uso de mercurio en los procesos de extracción han generado graves impactos en los ecosistemas acuáticos y en la salud de las comunidades ribereñas. Según informes del IDEAM, el río Cauca en esta zona presenta una de las mayores concentraciones de mercurio del país.</p>
+    <p>Frente a este panorama, organizaciones comunitarias y entidades gubernamentales trabajan en programas de reconversión productiva que combinan minería artesanal responsable con agricultura y ecoturismo, buscando diversificar la base económica de la región.</p>`,
+    categoria: 'ECONOMÍA',
+    fecha: hoy()
+  },
+  {
+    id: 3,
+    seccion: 'cultura',
+    emoji: '🎶',
+    titulo: 'El porro: alma sonora del Bajo Cauca',
+    resumen: 'Declarado Patrimonio Cultural de la Nación, el porro caucano convoca cada año a miles en festivales que celebran la identidad costeña-andina de la región.',
+    cuerpo: `<p>El porro es la expresión musical más arraigada en el Bajo Cauca Antioqueño. Este ritmo, de clara influencia caribeña, llegó a la región a través de los pobladores que migraron desde los departamentos de Córdoba y Sucre, mezclándose con influencias andinas para crear una variante propia y reconocible.</p>
+    <p>El Festival del Porro en Caucasia y el Festival Nacional del Porro en San Pelayo son las celebraciones más importantes. En estos eventos convergen bandas papayeras, chirimías y orquestas que mantienen viva una tradición de más de un siglo.</p>
+    <p>Instrumentos como la tuba, el bombardino, la trompeta y el clarinete son protagonistas de retretas que animan parques y plazas durante las fiestas patronales, convirtiendo al Bajo Cauca en uno de los territorios con mayor riqueza musical del norte colombiano.</p>`,
+    categoria: 'CULTURA',
+    fecha: hoy()
+  },
+  {
+    id: 4,
+    seccion: 'ambiente',
+    emoji: '🌿',
+    titulo: 'El Cauca Medio: biodiversidad amenazada',
+    resumen: 'Bosques húmedos tropicales, ciénagas y playones albergan una fauna única. La deforestación y minería ilegal ponen en riesgo este patrimonio natural.',
+    cuerpo: `<p>La subregión del Bajo Cauca Antioqueño forma parte de una de las zonas de mayor biodiversidad del planeta. Sus ecosistemas incluyen bosques húmedos tropicales, ciénagas y humedales del complejo cenagoso del Bajo Cauca-Nechí, declarado área de importancia para la conservación de aves.</p>
+    <p>En estas aguas habita el bocachico, pez de enorme valor cultural y alimentario para las comunidades ribereñas, cuya población ha disminuido drásticamente en las últimas décadas debido a la contaminación y a las barreras que impiden sus migraciones reproductivas.</p>
+    <p>Organizaciones como CORANTIOQUIA adelantan programas de restauración de rondas hídricas, repoblamiento de especies nativas y monitoreo de la calidad del agua, en alianza con pescadores artesanales y comunidades afrodescendientes custodias del territorio.</p>`,
+    categoria: 'AMBIENTE',
+    fecha: hoy()
+  },
+  {
+    id: 5,
+    seccion: 'historia',
+    emoji: '📜',
+    titulo: 'Raíces: historia de la colonización del Bajo Cauca',
+    resumen: 'Indígenas zenúes, africanos esclavizados y colonos antioqueños tejieron la identidad multicultural de este territorio fluvial.',
+    cuerpo: `<p>Antes de la conquista española, el territorio del Bajo Cauca estaba habitado por los zenúes, pueblo indígena que desarrolló una sofisticada red de canales de drenaje en las tierras bajas inundables, convirtiéndolas en fértiles zonas de cultivo y pesca.</p>
+    <p>Con la colonización, la región se convirtió en escenario de la minería esclavista. Miles de africanos fueron traídos para trabajar en los yacimientos auríferos de Zaragoza y El Bagre, dejando una huella cultural imborrable en la música, la gastronomía, la religiosidad y las prácticas de vida de la región.</p>
+    <p>En el siglo XIX y XX, la llegada de colonos antioqueños provenientes del oriente y del suroeste del departamento completó el mosaico humano del Bajo Cauca, dando lugar a una identidad híbrida que mezcla lo costeño, lo afrocolombiano y lo paisa en proporciones únicas.</p>`,
+    categoria: 'HISTORIA',
+    fecha: hoy()
+  },
+  {
+    id: 6,
+    seccion: 'economia',
+    emoji: '🥑',
+    titulo: 'Aguacate Hass: el nuevo oro verde del Bajo Cauca',
+    resumen: 'El cultivo de aguacate para exportación está transformando la economía agrícola de Caucasia y sus municipios vecinos.',
+    cuerpo: `<p>En los últimos años, el aguacate Hass ha emergido como una alternativa productiva poderosa en el Bajo Cauca Antioqueño. Las condiciones climáticas de la región —con temperaturas entre 28 y 32 grados y una pluviometría bien distribuida— resultan ideales para este cultivo de alta demanda internacional.</p>
+    <p>Pequeños y medianos productores de Caucasia, Cáceres y Tarazá han accedido a programas del Ministerio de Agricultura y de la Gobernación de Antioquia para reconvertir pasturas degradadas en huertos productivos, generando empleo y diversificando ingresos.</p>
+    <p>La cercanía con el puerto fluvial del Magangué y las carreteras hacia Medellín y la Costa Caribe facilita la logística de exportación, posicionando al Bajo Cauca como una subregión emergente en el mapa del agro colombiano de alto valor.</p>`,
+    categoria: 'ECONOMÍA',
+    fecha: hoy()
+  }
 ];
 
-function actualizarReloj() {
-    const ahora = new Date().toLocaleString('es-CO', { 
-        timeZone: 'America/Bogota', weekday: 'long', day: 'numeric', month: 'long', 
-        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
-    });
-    document.getElementById('fecha-actual').textContent = ahora.toUpperCase();
+const DATOS_WIDGETS = [
+  { valor: '~350.000', desc: 'Habitantes en la subregión del Bajo Cauca Antioqueño, según proyecciones DANE' },
+  { valor: '6 municipios', desc: 'Conforman el Bajo Cauca: Caucasia, El Bagre, Nechí, Zaragoza, Cáceres y Tarazá' },
+  { valor: 'Río Cauca', desc: 'Principal arteria fluvial del territorio. Segundo río más largo de Colombia, 1.350 km de longitud' },
+  { valor: '100°C', desc: 'Temperatura promedio 29°C · Clima cálido húmedo · Lluvia: 1.500 - 2.500 mm/año' },
+  { valor: 'Oro & Cacao', desc: 'Principales productos de exportación. Antioquia es el mayor productor de oro de Colombia' },
+  { valor: '1945', desc: 'Año de fundación oficial de Caucasia como municipio del departamento de Antioquia' }
+];
+
+// ═══════════════════════════════════════════════
+//  UTILIDADES
+// ═══════════════════════════════════════════════
+function hoy() {
+  return new Date().toLocaleDateString('es-CO', { year:'numeric', month:'long', day:'numeric', timeZone:'America/Bogota' });
 }
 
-function renderUI(data = ARTICULOS) {
-    const port = document.getElementById('portada-grid');
-    const grid = document.getElementById('articulos-grid');
-    const tkr = document.getElementById('ticker-text');
-
-    if (data.length > 0) {
-        const p = data[0];
-        port.innerHTML = `
-            <div class="articulo-principal" onclick="abrirModal(${p.id})">
-                <span style="color:var(--oro-claro); font-weight: bold; border-bottom: 2px solid var(--oro); position: relative; z-index: 2;">${p.categoria}</span>
-                <h2>${p.titulo}</h2>
-                <p style="opacity: 0.9; position: relative; z-index: 2;">${p.resumen}</p>
-            </div>
-            <div class="portada-lateral">
-                ${data.slice(1, 3).map(a => `
-                    <div class="art-secundario" onclick="abrirModal(${a.id})">
-                        <small style="color:var(--verde-selva); font-weight: bold;">${a.categoria}</small>
-                        <h4 style="font-family: 'Playfair Display'; font-size: 1.2rem; margin-top:5px;">${a.titulo}</h4>
-                    </div>
-                `).join('')}
-            </div>`;
-    }
-
-    grid.innerHTML = data.slice(3).map(a => `
-        <div class="tarjeta" onclick="abrirModal(${a.id})">
-            <small style="color:var(--oro); font-weight: bold;">${a.categoria}</small>
-            <h4 style="font-family: 'Playfair Display'; font-size: 1.4rem; margin: 10px 0;">${a.titulo}</h4>
-            <p style="font-size: 0.9rem; color: #555;">${a.resumen}</p>
-        </div>`).join('');
-
-    tkr.textContent = ARTICULOS.map(a => a.titulo.toUpperCase()).join('  ///  ');
+function actualizarFecha() {
+  const ahora = new Date().toLocaleString('es-CO', {
+    weekday:'long', year:'numeric', month:'long', day:'numeric',
+    hour:'2-digit', minute:'2-digit', timeZone:'America/Bogota'
+  });
+  document.getElementById('fecha-actual').textContent = ahora.charAt(0).toUpperCase() + ahora.slice(1);
 }
 
-async function generarArticuloIA() {
-    const btn = document.getElementById('ia-generar-btn');
-    const tema = document.getElementById('ia-tema').value;
-    const cat = document.getElementById('ia-categoria').value;
-    const res = document.getElementById('ia-articulo-generado');
+// ═══════════════════════════════════════════════
+//  RENDER PORTADA
+// ═══════════════════════════════════════════════
+function renderPortada(articulos) {
+  const grid = document.getElementById('portada-grid');
+  const principal = articulos[0];
+  const secundarios = articulos.slice(1, 3);
 
-    if(!tema) return alert("Por favor, introduce un tema para desarrollar el informe.");
-    
-    btn.disabled = true;
-    res.innerHTML = "<span class='loading'>✍️ VIBRAS POSITIVAS HM HM REDACTANDO INFORME PROFUNDO...</span>";
-
-    const prompt = `Actúa como el Director Editorial de la revista "El Cauca". 
-    Escribe un artículo PERIODÍSTICO EXTENSO, PROFESIONAL Y DETALLADO sobre: ${tema}. 
-    CONTEXTO: Bajo Cauca Antioqueño.
-    REGLAS:
-    - Mínimo 5 párrafos largos (100 palabras cada uno).
-    - Incluye datos históricos, análisis social y conclusiones.
-    - Usa un lenguaje culto y periodístico.
-    - Devuelve SOLO un objeto JSON con estas llaves: "titulo", "resumen", "cuerpo", "categoria" (donde cuerpo debe tener etiquetas <p> para cada párrafo largo).
-    Categoría sugerida: ${cat.toUpperCase()}`;
-
-    try {
-        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ 
-                contents: [{ parts: [{ text: prompt }] }],
-                generationConfig: { maxOutputTokens: 2500, temperature: 0.7 } 
-            })
-        });
-        const d = await resp.json();
-        const rawText = d.candidates[0].content.parts[0].text.replace(/```json|```/g, "").trim();
-        const art = JSON.parse(rawText);
-        
-        art.id = Date.now();
-        art.seccion = cat;
-        ARTICULOS.unshift(art);
-        
-        res.innerHTML = `<b style="color:var(--oro-claro)">✅ INFORME PUBLICADO: ${art.titulo}</b>`;
-        renderUI();
-    } catch (e) {
-        console.error(e);
-        res.innerHTML = "❌ Error en el proceso de redacción. Revisa la consola.";
-    } finally { btn.disabled = false; }
+  grid.innerHTML = `
+    <div class="articulo-principal" onclick="abrirModal(${principal.id})">
+      <div class="emoji-bg">${principal.emoji}</div>
+      <span class="art-etiqueta">${principal.categoria}</span>
+      <h2>${principal.titulo}</h2>
+      <p class="art-resumen">${principal.resumen}</p>
+      <div class="art-meta">
+        <span>📅 ${principal.fecha}</span>
+        <span>▶ Leer artículo completo</span>
+      </div>
+    </div>
+    <div class="portada-lateral">
+      ${secundarios.map(a => `
+        <div class="art-secundario" onclick="abrirModal(${a.id})">
+          <span class="art-etiqueta">${a.categoria}</span>
+          <h3>${a.titulo}</h3>
+          <p>${a.resumen}</p>
+          <div class="art-meta" style="margin-top:8px;font-size:0.68rem;color:#888">${a.fecha}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
 }
 
-function filtrarSeccion(sec, btn) {
-    document.querySelectorAll('nav.secciones button').forEach(b => b.classList.remove('activo'));
-    btn.classList.add('activo');
-    const filtrados = sec === 'todo' ? ARTICULOS : ARTICULOS.filter(a => a.seccion === sec);
-    renderUI(filtrados);
+// ═══════════════════════════════════════════════
+//  RENDER GRID
+// ═══════════════════════════════════════════════
+function renderGrid(articulos) {
+  const grid = document.getElementById('articulos-grid');
+  const resto = articulos.slice(3);
+  grid.innerHTML = resto.map(a => `
+    <div class="tarjeta" data-seccion="${a.seccion}" onclick="abrirModal(${a.id})">
+      <div class="tarjeta-imagen" style="background:${colorSeccion(a.seccion)}">
+        <span style="font-size:3.5rem">${a.emoji}</span>
+      </div>
+      <div class="tarjeta-cuerpo">
+        <h3>${a.titulo}</h3>
+        <p>${a.resumen}</p>
+        <div class="tarjeta-footer">
+          <span class="tarjeta-categoria">${a.categoria}</span>
+          <span class="tarjeta-fecha">${a.fecha}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
 }
 
+function colorSeccion(s) {
+  const m = { region:'#1A3A2A', economia:'#2D5A3D', cultura:'#4A2A1A', ambiente:'#1A3A1A', historia:'#3A2A1A', deporte:'#1A2A3A' };
+  return m[s] || '#1A3A2A';
+}
+
+// ═══════════════════════════════════════════════
+//  FILTRAR
+// ═══════════════════════════════════════════════
+let seccionActual = 'todo';
+
+function filtrarSeccion(seccion, btn) {
+  seccionActual = seccion;
+  document.querySelectorAll('nav.secciones button').forEach(b => b.classList.remove('activo'));
+  btn.classList.add('activo');
+
+  const filtrados = seccion === 'todo' ? ARTICULOS_BASE : ARTICULOS_BASE.filter(a => a.seccion === seccion);
+  if(filtrados.length >= 3) {
+    renderPortada(filtrados);
+    renderGrid(filtrados);
+  } else {
+    renderGrid(filtrados);
+    document.getElementById('portada-grid').innerHTML = '<div style="padding:20px;color:#888;grid-column:1/-1;text-align:center">Genera más artículos sobre esta sección con el panel IA</div>';
+  }
+}
+
+// ═══════════════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════════════
 function abrirModal(id) {
-    const a = ARTICULOS.find(x => x.id === id);
-    if(!a) return;
-    document.getElementById('modal-titulo').textContent = a.titulo;
-    document.getElementById('modal-cuerpo').innerHTML = a.cuerpo;
-    document.getElementById('modal-overlay').style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+  const art = ARTICULOS_BASE.find(a => a.id === id);
+  if (!art) return;
+  document.getElementById('modal-etiqueta').textContent = art.categoria;
+  document.getElementById('modal-titulo').textContent = art.titulo;
+  document.getElementById('modal-meta').textContent = `📅 ${art.fecha} · Bajo Cauca Antioqueño, Colombia`;
+  document.getElementById('modal-cuerpo').innerHTML = art.cuerpo;
+  document.getElementById('modal-overlay').classList.add('abierto');
+  document.body.style.overflow = 'hidden';
 }
 
-function cerrarModal() { 
-    document.getElementById('modal-overlay').style.display = 'none'; 
-    document.body.style.overflow = 'auto';
+function cerrarModal(e) {
+  if (e.target === document.getElementById('modal-overlay')) cerrarModalBtn();
 }
 
-function checkMediodia() {
-    const ahora = new Date();
-    if (ahora.getHours() === 12 && ahora.getMinutes() === 0) {
-        location.reload();
+function cerrarModalBtn() {
+  document.getElementById('modal-overlay').classList.remove('abierto');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if(e.key === 'Escape') cerrarModalBtn(); });
+
+// ═══════════════════════════════════════════════
+//  GENERADOR IA — ARTÍCULOS COMPLETOS
+// ═══════════════════════════════════════════════
+const CATEGORIA_LABELS = {
+  historia: 'Historia de la región',
+  economia: 'Economía y minería',
+  cultura: 'Cultura y tradiciones',
+  ambiente: 'Medio ambiente',
+  gastronomia: 'Gastronomía típica',
+  turismo: 'Turismo y lugares',
+  personajes: 'Personajes ilustres',
+  deporte: 'Deportes y comunidad',
+  actualidad: 'Actualidad y desarrollo'
+};
+
+// Rotar categorías automáticamente en modo AUTO
+const CATEGORIAS_ROTACION = Object.keys(CATEGORIA_LABELS);
+let rotacionIdx = 0;
+
+let autoIntervalId = null;
+let autoActivo = false;
+let autoContador = 0;
+const AUTO_INTERVALO_MS = 5 * 60 * 1000; // 5 minutos
+
+function toggleAutoActualizacion() {
+  autoActivo = !autoActivo;
+  const btn = document.getElementById('ia-auto-btn');
+  const status = document.getElementById('ia-auto-status');
+
+  if (autoActivo) {
+    btn.textContent = '⏹ AUTO: ON';
+    btn.classList.add('activo');
+    status.innerHTML = '<span class="dot"></span>Auto-actualización activa · Nuevo artículo cada 5 minutos · Generando el primero ahora...';
+    generarArticuloIA(true); // genera inmediatamente el primero
+    autoIntervalId = setInterval(() => generarArticuloIA(true), AUTO_INTERVALO_MS);
+  } else {
+    btn.textContent = '🔄 AUTO: OFF';
+    btn.classList.remove('activo');
+    clearInterval(autoIntervalId);
+    autoIntervalId = null;
+    status.innerHTML = 'Auto-actualización detenida.';
+    setTimeout(() => { status.innerHTML = ''; }, 3000);
+  }
+}
+
+async function generarArticuloIA(esAuto = false) {
+  const btn = document.getElementById('ia-generar-btn');
+  const resultado = document.getElementById('ia-resultado');
+  const contenedor = document.getElementById('ia-articulo-generado');
+  const status = document.getElementById('ia-auto-status');
+
+  // En modo auto, rotar categorías automáticamente
+  let categoria, temaExtra;
+  if (esAuto) {
+    categoria = CATEGORIAS_ROTACION[rotacionIdx % CATEGORIAS_ROTACION.length];
+    rotacionIdx++;
+    temaExtra = '';
+  } else {
+    categoria = document.getElementById('ia-categoria').value;
+    temaExtra = document.getElementById('ia-tema').value.trim();
+  }
+
+  btn.disabled = true;
+  resultado.classList.add('visible');
+  contenedor.innerHTML = '<div class="loading">✍ La IA está redactando un artículo completo... esto puede tomar unos segundos...</div>';
+
+  const temaFinal = temaExtra
+    ? `${CATEGORIA_LABELS[categoria]} — tema específico: "${temaExtra}"`
+    : CATEGORIA_LABELS[categoria];
+
+  const SYSTEM_PROMPT = `Eres el editor jefe de "El Cauca", una revista digital del Bajo Cauca Antioqueño, Colombia.
+Escribes artículos periodísticos LARGOS Y COMPLETOS, con profundidad, nunca cortados ni incompletos.
+Cada artículo debe tener entre 600 y 900 palabras y mínimo 6 párrafos bien desarrollados.
+Estructura los artículos con una introducción enganchadora, desarrollo detallado por subtemas, y un cierre reflexivo.
+
+RESPONDE ÚNICAMENTE con un objeto JSON válido, sin markdown, sin backticks, sin texto fuera del JSON:
+{
+  "titulo": "Título periodístico impactante (máx 90 caracteres)",
+  "subtitulo": "Entradilla que resume la historia en máx 150 caracteres",
+  "emoji": "Un emoji representativo del tema",
+  "secciones": [
+    { "subtitulo_seccion": "Título de la sección (opcional, puede ser vacío)", "parrafos": ["párrafo 1", "párrafo 2"] },
+    { "subtitulo_seccion": "", "parrafos": ["párrafo 3", "párrafo 4"] },
+    { "subtitulo_seccion": "Título sección 2", "parrafos": ["párrafo 5", "párrafo 6"] }
+  ]
+}
+
+Cada párrafo debe tener entre 80 y 130 palabras. Mínimo 6 párrafos en total distribuidos en las secciones.
+El contenido debe ser informativo, culturalmente preciso sobre la región (Caucasia, El Bagre, Nechí, Zaragoza, Cáceres, Tarazá) y escrito en español colombiano cálido y cercano.`;
+
+  try {
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 3000,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: `Escribe un artículo periodístico completo y detallado sobre: ${temaFinal}` }]
+      })
+    });
+
+    const data = await resp.json();
+    const texto = data.content.map(i => i.text || '').join('');
+    // Limpiar posibles backticks o prefijos
+    const limpio = texto.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+
+    // Buscar el objeto JSON dentro del texto por si hay texto extra
+    const inicio = limpio.indexOf('{');
+    const fin = limpio.lastIndexOf('}');
+    const jsonStr = inicio >= 0 && fin > inicio ? limpio.slice(inicio, fin + 1) : limpio;
+
+    const art = JSON.parse(jsonStr);
+
+    // Construir HTML del cuerpo completo con subtítulos de sección
+    let cuerpoHTML = '';
+    if (art.secciones && Array.isArray(art.secciones)) {
+      art.secciones.forEach(sec => {
+        if (sec.subtitulo_seccion && sec.subtitulo_seccion.trim()) {
+          cuerpoHTML += `<h4>${sec.subtitulo_seccion}</h4>`;
+        }
+        if (Array.isArray(sec.parrafos)) {
+          sec.parrafos.forEach(p => { cuerpoHTML += `<p>${p}</p>`; });
+        }
+      });
     }
+
+    const nuevoId = Date.now();
+    autoContador++;
+
+    // Resumen: primer párrafo de la primera sección
+    const primerParrafo = art.secciones?.[0]?.parrafos?.[0] || art.subtitulo;
+    const resumenCorto = primerParrafo.length > 160 ? primerParrafo.slice(0, 157) + '...' : primerParrafo;
+
+    const nuevoArticulo = {
+      id: nuevoId,
+      seccion: categoria,
+      emoji: art.emoji || '📰',
+      titulo: art.titulo,
+      resumen: art.subtitulo || resumenCorto,
+      cuerpo: cuerpoHTML,
+      categoria: (CATEGORIA_LABELS[categoria] || categoria).toUpperCase(),
+      fecha: hoy()
+    };
+
+    ARTICULOS_BASE.unshift(nuevoArticulo);
+
+    // Vista previa en el panel (primeros 2 párrafos)
+    const previaHTML = art.secciones?.[0]?.parrafos?.slice(0,2).map(p=>`<p>${p}</p>`).join('') || cuerpoHTML;
+    contenedor.innerHTML = `
+      <h3>${art.emoji} ${art.titulo}</h3>
+      <p style="color:var(--oro-claro);font-style:italic;margin-bottom:14px">${art.subtitulo}</p>
+      ${previaHTML}
+      <p style="color:rgba(245,237,216,0.5);font-style:italic;font-size:0.78rem">... artículo completo disponible al hacer clic en la portada ...</p>
+      <div style="margin-top:14px;padding-top:10px;border-top:1px solid rgba(200,150,42,0.3);font-size:0.72rem;color:var(--oro-claro)">
+        ✅ Artículo #${autoContador} generado y añadido a la revista · ${hoy()}${esAuto ? ' · Modo automático activo' : ''}
+      </div>
+    `;
+
+    renderPortada(ARTICULOS_BASE);
+    renderGrid(ARTICULOS_BASE);
+    actualizarTicker();
+
+    if (esAuto && autoActivo) {
+      status.innerHTML = `<span class="dot"></span>Auto-actualización activa · ${autoContador} artículo(s) generado(s) · Próximo en 5 min`;
+    }
+
+  } catch(err) {
+    contenedor.innerHTML = `<div style="color:#e07070">⚠️ Error al generar el artículo.<br><small>${err.message}</small></div>`;
+    if (esAuto) {
+      const status = document.getElementById('ia-auto-status');
+      status.innerHTML = `<span style="color:#e07070">⚠️ Error en ciclo auto · reintentando en 5 min · ${err.message}</span>`;
+    }
+  }
+
+  btn.disabled = false;
 }
 
-actualizarReloj();
-setInterval(actualizarReloj, 1000);
-setInterval(checkMediodia, 60000);
-renderUI();
+// ═══════════════════════════════════════════════
+//  TICKER DINÁMICO
+// ═══════════════════════════════════════════════
+function actualizarTicker() {
+  const titulos = ARTICULOS_BASE.slice(0, 6).map(a => a.titulo).join('  ·  ');
+  const doble = titulos + '  ·  ' + titulos;
+  document.getElementById('ticker-text').textContent = doble;
+}
+
+// ═══════════════════════════════════════════════
+//  WIDGET ROTATIVO
+// ═══════════════════════════════════════════════
+let widgetIdx = 0;
+function rotarWidget() {
+  widgetIdx = (widgetIdx + 1) % DATOS_WIDGETS.length;
+  const w = DATOS_WIDGETS[widgetIdx];
+  document.getElementById('dato-valor').textContent = w.valor;
+  document.getElementById('dato-desc').textContent = w.desc;
+}
+
+// ═══════════════════════════════════════════════
+//  INICIALIZAR
+// ═══════════════════════════════════════════════
+actualizarFecha();
+setInterval(actualizarFecha, 30000);
+setInterval(rotarWidget, 5000);
+renderPortada(ARTICULOS_BASE);
+renderGrid(ARTICULOS_BASE);
+actualizarTicker();
 </script>
 </body>
 </html>
